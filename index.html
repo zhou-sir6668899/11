@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>互动页面</title>
+    <style>
+        /* 初始按钮样式 */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+            cursor: pointer;
+        }
+        #startBtn {
+            padding: 20px 40px;
+            font-size: 24px;
+            background: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        #startBtn:hover {
+            transform: scale(1.1);
+        }
+
+        /* 全屏信息样式 */
+        .fullscreen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            color: #ff0000;
+            font-size: 48px;
+            text-align: center;
+            padding-top: 20%;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <button id="startBtn" onclick="enterFullscreen()">少爷，你不敢点吧</button>
+    <div id="message" class="fullscreen">获取信息中...</div>
+
+    <script>
+        function enterFullscreen() {
+            // 隐藏按钮
+            document.getElementById("startBtn").style.display = "none";
+
+            // 显示全屏信息
+            const msg = document.getElementById("message");
+            msg.style.display = "block";
+
+            // 持续添加文字制造压迫感
+            setInterval(() => {
+                msg.innerHTML += "获取信息中...<br>";
+            }, 500);
+
+            // 禁止右键和F12
+            document.addEventListener('contextmenu', e => e.preventDefault());
+            document.onkeydown = function(e) {
+                if (e.key === "F12" || e.ctrlKey) {
+                    return false;
+                }
+            };
+        }
+    </script>
+</body>
+</html>
+    
